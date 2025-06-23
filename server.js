@@ -22,21 +22,28 @@ app.post("/api/ask-ai", async (req, res) => {
 
   try {
     const chatResponse = await openai.chat.completions.create({
-      model:"gpt-3.5-turbo" // ← có thể là gpt-4 hoặc gpt-3.5-turbo
+      model: "gpt-3.5-turbo", // hoặc "gpt-4" nếu bạn có quyền dùng
       messages: [
-        { role: "system", content: "Bạn là một trợ lý AI giúp học sinh giải bài toán lớp 9." },
-        { role: "user", content: question },
+        {
+          role: "system",
+          content: "Bạn là một trợ lý AI giúp học sinh giải bài toán lớp 9.",
+        },
+        {
+          role: "user",
+          content: question,
+        },
       ],
       temperature: 0.7,
     });
-    
-    console.log("🧾 PHẢN HỒI:", JSON.stringify(chatResponse, null, 2));
-    res.json(chatResponse);
+
+    console.log("🔥 PHẢN HỒI TỪ OPENAI:", JSON.stringify(chatResponse, null, 2));
+    res.json({ choices: chatResponse.choices });
   } catch (error) {
     console.error("Lỗi khi gọi OpenAI:", error.message);
     res.status(500).json({ error: "Đã xảy ra lỗi khi gọi AI." });
   }
 });
+
 app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
 });

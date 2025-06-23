@@ -27,6 +27,7 @@ async function askAI() {
   responseBox.textContent = "⏳ AI đang suy nghĩ...";
 
   try {
+
     const response = await fetch("https://tlyai.onrender.com/api/ask-ai", {
       method: "POST",
       headers: {
