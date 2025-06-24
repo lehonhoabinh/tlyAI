@@ -43,7 +43,11 @@ app.post("/api/ask-ai", async (req, res) => {
     res.status(500).json({ error: "Đã xảy ra lỗi khi gọi AI." });
   }
 });
+app.get('/', (req, res) => {
+  res.send('Server is running!');
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
 });
+
